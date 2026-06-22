@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中彩网 · 简明使用指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', '宋体', serif;
+            background-color: #f7f4ef;
+            color: #2e2c29;
+            line-height: 1.8;
+            padding: 0 1.5rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrapper {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #fcfaf6;
+            padding: 3rem 2.5rem 2.8rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 开场短句 - 大引号 */
+        .opening {
+            font-size: 1.9rem;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: 0.03em;
+            text-indent: 0;
+            margin-bottom: 1.8rem;
+            padding: 0.8rem 0 0.5rem 0;
+            border-bottom: 1px solid #e5dfd6;
+            position: relative;
+        }
+
+        .opening::before {
+            content: "“";
+            font-size: 4rem;
+            color: #c7b5a0;
+            position: absolute;
+            left: -0.6rem;
+            top: -0.8rem;
+            font-family: 'Georgia', serif;
+            line-height: 1;
+        }
+
+        .opening-text {
+            padding-left: 1.2rem;
+            display: block;
+            font-style: italic;
+            color: #3d3934;
+        }
+
+        /* 承接段落 */
+        .intro-paragraph {
+            font-size: 1.05rem;
+            margin: 1.8rem 0 1.4rem;
+            text-align: justify;
+            word-break: break-word;
+        }
+
+        .intro-paragraph strong {
+            font-weight: 600;
+            color: #5f5549;
+        }
+
+        /* 引用块/提示框 */
+        .tip-box {
+            background-color: #f0ece5;
+            border-left: 5px solid #b7a68e;
+            padding: 1.4rem 1.8rem;
+            margin: 2rem 0 1.8rem;
+            border-radius: 0 12px 12px 0;
+            font-size: 1rem;
+            color: #3d3832;
+            font-style: normal;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .tip-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .tip-box .label {
+            display: inline-block;
+            background-color: #d8cfc0;
+            padding: 0.1rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+            color: #2f2a25;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+        }
+
+        /* 特点列表 - 温和卡片式 */
+        .feature-list {
+            list-style: none;
+            margin: 2.2rem 0 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .feature-list li {
+            background: #f6f2eb;
+            padding: 0.9rem 1.5rem 0.9rem 2rem;
+            border-radius: 40px 12px 12px 40px;
+            font-size: 1.02rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            border: 1px solid #e3dbd0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+        }
+
+        .feature-list li::before {
+            content: "·";
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #9f8e79;
+            line-height: 1;
+            margin-right: 0.2rem;
+        }
+
+        .feature-list li span {
+            background: #dacfc1;
+            color: #2d2924;
+            border-radius: 24px;
+            padding: 0 0.8rem;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            margin-left: 0.5rem;
+            white-space: nowrap;
+        }
+
+        /* 场景段落 */
+        .scene-text {
+            font-size: 1rem;
+            margin: 1.8rem 0 1.2rem;
+            text-align: justify;
+        }
+
+        .scene-text .inline-link {
+            color: #6f5e4b;
+            text-decoration: none;
+            border-bottom: 1px dashed #b7a68e;
+            transition: border-color 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+
+        .scene-text .inline-link:hover {
+            border-bottom: 1px solid #6f5e4b;
+            color: #3a322b;
+        }
+
+        /* FAQ 摘要（短问答） */
+        .faq-mini {
+            margin: 2.2rem 0 1.4rem;
+            background-color: #f3efe9;
+            padding: 1.4rem 1.8rem;
+            border-radius: 16px;
+        }
+
+        .faq-mini h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4f463d;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #e2d9cd;
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-mini details:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-mini summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: #3f3932;
+            padding: 0.2rem 0;
+            font-size: 0.98rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-mini summary::before {
+            content: "▸";
+            margin-right: 0.6rem;
+            color: #9f8e79;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-mini .answer {
+            padding: 0.5rem 0 0.3rem 1.6rem;
+            color: #4d4740;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* 温和结尾 */
+        .gentle-ending {
+            margin: 2.5rem 0 0.6rem;
+            text-align: center;
+            border-top: 1px solid #e3dbd0;
+            padding-top: 2rem;
+            font-size: 1rem;
+            color: #5b534a;
+            font-style: italic;
+        }
+
+        .gentle-ending .ending-quote {
+            display: block;
+            max-width: 400px;
+            margin: 0 auto 0.6rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body {
+                padding: 0 0.8rem 2rem;
+            }
+            .page-wrapper {
+                padding: 2rem 1.2rem 2.2rem;
+                margin-top: 1rem;
+                border-radius: 18px;
+            }
+            .opening {
+                font-size: 1.6rem;
+                padding-left: 0.5rem;
+            }
+            .opening::before {
+                font-size: 3rem;
+                left: -0.2rem;
+                top: -0.2rem;
+            }
+            .opening-text {
+                padding-left: 0.8rem;
+            }
+            .feature-list li {
+                padding: 0.8rem 1rem 0.8rem 1.2rem;
+                border-radius: 30px 10px 10px 30px;
+                font-size: 0.95rem;
+            }
+            .tip-box {
+                padding: 1rem 1.2rem;
+            }
+            .faq-mini {
+                padding: 1rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .opening {
+                font-size: 1.4rem;
+            }
+            .page-wrapper {
+                padding: 1.5rem 1rem;
+            }
+            .feature-list li span {
+                white-space: normal;
+                font-size: 0.7rem;
+                padding: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- 开场短句：用引号包裹 -->
+        <div class="opening">
+            <span class="opening-text">一份温和的指南，胜过十次匆忙的寻找。</span>
+        </div>
+
+        <!-- 承接段落：简明指南 + 访问提醒 -->
+        <div class="intro-paragraph">
+            初次来到一个信息型站点，最需要的往往不是眼花缭乱的功能列表，而是一份安静、清晰的路径说明。<strong>中彩网</strong>本身并不追求喧哗，它更像一个安静的档案室与信息节点——汇集了与彩票知识、历史数据、规则说明相关的内容。如果你对数字背后的逻辑或公益金流向有所好奇，这里可以成为起点。
+        </div>
+
+        <!-- 提示框 / 引用块 -->
+        <div class="tip-box">
+            <span class="label">📌 访问提醒</span>
+            <p>使用任何信息平台之前，先花一分钟了解它的定位与边界，比直接开始翻阅更有效。如果你计划通过 <a href="https://pro-zhcw.com" class="inline-link" style="border-bottom: 1px solid #b7a68e; text-decoration: none; color:#6f5e4b;">中彩网</a> 查询内容，建议留意以下几点：</p>
+            <p>① 站点数据通常有更新周期，以页面标注为准；<br>
+            ② 部分内容属于知识整理性质，不构成任何操作建议。</p>
+        </div>
+
+        <!-- 特点列表：围绕“简明、克制、有用” -->
+        <ul class="feature-list">
+            <li>结构清晰，分类温和 <span>信息组织</span></li>
+            <li>历史开奖号码与规则文档并存 <span>文献式</span></li>
+            <li>无弹窗干扰，阅读体验安静 <span>极简</span></li>
+            <li>适合初次了解彩票机制的人 <span>入门友好</span></li>
+        </ul>
+
+        <!-- 场景段落：嵌入链接自然 -->
+        <div class="scene-text">
+            想象一下，你只是想查一组过去几期的号码，或者想弄清楚某个玩法的奖金分配逻辑——这时候，一个没有冗余广告、页面加载克制的站点会让人舒心。在我自己的使用里，<a href="https://pro-zhcw.com" class="inline-link">中彩网</a> 常被当作一个「冷知识补给站」：不算花哨，但信息罗列规整，有种老派图书馆索引卡的气质。不需要注册，也看不到诱导分享的按钮，这点在当下显得难得。
+        </div>
+
+        <!-- FAQ 摘要（一个简短问答块） -->
+        <div class="faq-mini">
+            <h4>❓ 常见疑问（快速了解）</h4>
+            <details>
+                <summary>是否需要注册或下载 App？</summary>
+                <div class="answer">
+                    不需要。直接在浏览器打开即可浏览大部分内容，无需登录，也没有强制下载。
+                </div>
+            </details>
+            <details>
+                <summary>数据更新频率如何？</summary>
+                <div class="answer">
+                    通常每个开奖日后会有同步，具体请以站点页面显示的最新日期为准。历史数据保留较为完整。
+                </div>
+            </details>
+            <details>
+                <summary>站点是否提供预测或推荐？</summary>
+                <div class="answer">
+                    不提供。该站点更偏向信息存档与规则说明，不包含任何预测、荐号或诱导性内容。
+                </div>
+            </details>
+        </div>
+
+        <!-- 温和结尾 -->
+        <div class="gentle-ending">
+            <span class="ending-quote">愿每一次查阅，都带着清晰的意图与平静的心态。</span>
+            <span style="display: block; font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">—— 信息本身已是工具，如何使用则在你。</span>
+        </div>
+    </div>
+</body>
+</html>
