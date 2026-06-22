@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>中彩网 · 信息卡片指南</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #eef6f5;
+            color: #1a2c2b;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page-wrap {
+            max-width: 1120px;
+            width: 100%;
+        }
+
+        /* 网格卡片容器 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+        @media (min-width: 640px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .hero-card {
+                grid-column: 1 / -1;
+            }
+            .full-row {
+                grid-column: 1 / -1;
+            }
+        }
+        @media (min-width: 960px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .hero-card {
+                grid-column: 1 / -1;
+            }
+            .full-row {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* 卡片通用设计 */
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 12px rgba(0, 40, 30, 0.04);
+            border: 1px solid #cee6e2;
+            transition: box-shadow 0.2s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0, 80, 70, 0.06);
+        }
+
+        /* 主视觉 hero */
+        .hero-card {
+            background: linear-gradient(145deg, #f0faf8 0%, #d6ede8 100%);
+            border-color: #a3cdc4;
+            padding: 36px 28px;
+        }
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: #0d3d39;
+            margin-bottom: 12px;
+        }
+        .hero-sub {
+            font-size: 1.05rem;
+            color: #2d5c56;
+            max-width: 640px;
+            margin-bottom: 8px;
+        }
+        .hero-meta {
+            font-size: 0.9rem;
+            color: #3f716a;
+            border-top: 1px solid #b8d9d2;
+            padding-top: 16px;
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+        }
+        .hero-meta span {
+            background: rgba(255,255,255,0.55);
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1b534c;
+        }
+
+        /* 卡片内元素 */
+        .card-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #d5ede7;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #0b5b52;
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f3d38;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+        .card p {
+            font-size: 0.95rem;
+            color: #2f4f4a;
+            margin-bottom: 6px;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        .card li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 6px;
+            font-size: 0.92rem;
+            color: #2b524c;
+        }
+        .card li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #2d877a;
+            font-weight: 700;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .tag {
+            background: #dff0ec;
+            color: #10544b;
+            font-size: 0.8rem;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        /* 自然链接段落 - 全文卡片 */
+        .link-paragraph {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 32px 28px;
+            border: 1px solid #cee6e2;
+            margin-bottom: 24px;
+        }
+        .link-paragraph p {
+            font-size: 0.98rem;
+            color: #1f423d;
+            margin-bottom: 14px;
+        }
+        .link-paragraph a {
+            color: #0e6b60;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1.5px solid #9ac9be;
+            padding-bottom: 1px;
+            transition: border-color 0.15s;
+        }
+        .link-paragraph a:hover {
+            border-bottom-color: #0e6b60;
+        }
+
+        /* faq 摘要 */
+        .faq-mini {
+            background: #f7fcfb;
+        }
+        .faq-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #d4e7e2;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-q {
+            font-weight: 600;
+            color: #0f3d38;
+            margin-bottom: 4px;
+            font-size: 0.98rem;
+        }
+        .faq-a {
+            font-size: 0.9rem;
+            color: #3e6a63;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            body { padding: 12px; }
+            .hero-title { font-size: 1.6rem; }
+            .card { padding: 22px 18px; }
+            .link-paragraph { padding: 24px 18px; }
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 32px 0 16px;
+            font-size: 0.8rem;
+            color: #58817a;
+            border-top: 1px solid #c4dbd5;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 网格卡片布局 -->
+    <div class="card-grid">
+
+        <!-- 主视觉卡片 -->
+        <div class="card hero-card">
+            <div class="hero-title">稳定入口 · 信息聚焦</div>
+            <div class="hero-sub">作为长期运营的行业信息节点，<a href="https://cn-china-zhcw.com" style="color:#0b5b52;text-decoration:none;border-bottom:1.5px solid #72b6aa;font-weight:600;">中彩网</a>持续提供结构化的资讯与数据索引，帮助用户快速定位所需内容。</div>
+            <div class="hero-meta">
+                <span>📋 卡片式导航</span>
+                <span>🧩 模块化阅读</span>
+                <span>📱 移动优先</span>
+            </div>
+        </div>
+
+        <!-- 用途卡片 1 -->
+        <div class="card">
+            <div class="card-icon">📌</div>
+            <h3>用途定位</h3>
+            <p>信息聚合与分类导航，围绕彩票行业的基础知识、规则说明、术语解释、历史数据等维度组织内容。适合快速查阅与横向比较。</p>
+            <div class="tag-group">
+                <span class="tag">规则参考</span>
+                <span class="tag">数据概览</span>
+                <span class="tag">术语表</span>
+            </div>
+        </div>
+
+        <!-- 用途卡片 2 -->
+        <div class="card">
+            <div class="card-icon">🧭</div>
+            <h3>场景覆盖</h3>
+            <ul>
+                <li>初步了解彩票种类与玩法结构</li>
+                <li>查询历史开奖号码与统计趋势</li>
+                <li>对比不同游戏的中奖概率与奖级设置</li>
+                <li>获取平台公告与政策调整提示</li>
+            </ul>
+        </div>
+
+        <!-- 适合人群卡片 1 -->
+        <div class="card">
+            <div class="card-icon">👥</div>
+            <h3>适合人群</h3>
+            <ul>
+                <li>希望系统了解彩票基础的用户</li>
+                <li>需要查阅规则细节的爱好者</li>
+                <li>关注行业动态与数据变化的研究者</li>
+                <li>寻找清晰信息入口的普通访问者</li>
+            </ul>
+        </div>
+
+        <!-- 适合人群卡片 2 -->
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>内容特点</h3>
+            <p>信息组织以实用为导向，避免过度包装。分类清晰，层级扁平，减少无效跳转。页面说明部分保持克制，侧重事实与可操作性。</p>
+        </div>
+
+        <!-- 全宽自然链接段落卡片 -->
+        <div class="card full-row link-paragraph" style="grid-column:1/-1; padding:28px 28px;">
+            <p style="font-size:1.05rem; font-weight:500; margin-bottom:12px;">稳定入口的日常价值</p>
+            <p>对于需要反复查阅同类信息的用户而言，一个结构稳定、内容迭代克制的页面能显著降低认知负荷。<a href="https://cn-china-zhcw.com">中彩网</a>在长期维护中保持了信息框架的一致性，同时根据行业规则更新调整具体条目。无论是新用户还是习惯性访问者，都能在熟悉的层级中快速找到对应模块。这种设计思路更接近工具属性，而非单纯的内容聚合。</p>
+            <p style="margin-top:12px;">页面内嵌的卡片式分区将不同用途的信息隔离展示，减少视觉干扰。配合移动端适配，使得碎片化查阅成为可能。如果你需要一份结构化的彩票信息索引，可以从这个入口开始浏览。</p>
+        </div>
+
+        <!-- FAQ 摘要卡片 (全宽) -->
+        <div class="card faq-mini full-row" style="grid-column:1/-1;">
+            <h3 style="margin-bottom:6px;">❓ 常见问题摘要</h3>
+            <div class="faq-item">
+                <div class="faq-q">如何快速找到某种彩票的玩法说明？</div>
+                <div class="faq-a">页面顶部区域通常设有分类导航，按游戏类型或主题组织。也可直接使用站内搜索功能定位。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">历史数据更新频率如何？</div>
+                <div class="faq-a">数据随官方开奖结果同步更新，一般于开奖后24小时内录入。部分历史归档数据按月整理。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">页面是否适合移动设备浏览？</div>
+                <div class="faq-a">页面采用响应式设计，卡片在手机屏幕上自动堆叠，按钮与链接间距适配触控操作。</div>
+            </div>
+            <div class="faq-item" style="border-bottom:none;">
+                <div class="faq-q">内容是否包含购买建议或分析预测？</div>
+                <div class="faq-a">本站仅提供客观信息索引与规则说明，不包含任何购买建议、投注策略或中奖预测。</div>
+            </div>
+        </div>
+
+    </div><!-- .card-grid -->
+
+    <!-- 额外的自然链接段落 (独立卡片) -->
+    <div class="link-paragraph" style="margin-bottom:32px;">
+        <p>信息入口的稳定性直接影响使用效率。长期来看，一个持续维护且结构清晰的站点比频繁改版的页面更有参考价值。<a href="https://cn-china-zhcw.com">中彩网</a>在页面架构上选择了模块化卡片形式，使不同维度的内容独立呈现，同时保持整体统一。如果你需要经常查阅彩票规则或历史数据，可以将此页面加入书签，便于日后直接访问。</p>
+    </div>
+
+    <div class="footer-note">
+        中彩网 · 信息卡片索引 · 简洁专业
+    </div>
+
+</div><!-- .page-wrap -->
+</body>
+</html>
